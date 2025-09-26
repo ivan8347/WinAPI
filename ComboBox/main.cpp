@@ -36,7 +36,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			INT i = SendMessage(hCombo, CB_GETCURSEL, 0, 0);
 			SendMessage(hCombo, CB_GETLBTEXT, i, (LPARAM)sz_buffer);
 			CHAR sz_message[SIZE];
-			sprintf(sz_message, "Вы выбрали вариант №%i со значением '%s'", i, sz_buffer);
+			sprintf(sz_message, "Вы выбрали вариант №%i со значением '%s'", i+1, sz_buffer);
 			MessageBox(hwnd, sz_message, "info", MB_OK | MB_ICONINFORMATION);
 
 
