@@ -4,6 +4,7 @@
 
 #define DEFAULT_LOGIN_HINT "¬ведите им€ пользовател€"
 	static HWND hEditLogin, hEditPassword;
+	//const char g_z_LOGIN_INVITE[] = ""¬ведите им€ пользовател€""
 	//char buf[256];
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -27,6 +28,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		SetFocus(hEditLogin);
 		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
 		SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);
+		//SendMessage(hEditLogin,WM_SETTEXT,0,(LPARAM)g_sz_LOGIN_INVENT)
 	}
 	return TRUE;
 	break;
