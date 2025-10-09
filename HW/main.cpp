@@ -45,20 +45,27 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
 
-	int winWidth = screenWidth * 3 / 4;
+	int winWidth = screenWidth * 2 / 4;
 	int winHeight = screenHeight * 3 / 4;
 
 	// Центрируем окно
 	int x = (screenWidth - winWidth) / 2;
 	int y = (screenHeight - winHeight) / 2;
+
 	// Объявляем буфер для заголовка
 	char windowTitle[256];
+	int percentWidth = winWidth * 100 / screenWidth;
+	int percentHeight = winHeight * 100 / screenHeight;
 
-	// Формируем строку заголовка
-	sprintf_s(windowTitle, sizeof(windowTitle), "Размер: %dx%d | Позиция: (%d, %d)", winWidth, winHeight, x, y);
+	sprintf_s(windowTitle, sizeof(windowTitle),
+		"Размер: %dx%d (%d%% x %d%%) | Позиция: (%d, %d)",
+		winWidth, winHeight,
+		percentWidth, percentHeight,
+		x, y);
 
 	// Создаем окно с динамическим заголовком
-	HWND hwnd = CreateWindowEx(
+	HWND hwnd = CreateWindowEx
+	(
 		NULL,
 		g_sz_WND_CLASS_NAME,
 		windowTitle, // сюда передается сформированный заголовок
@@ -117,14 +124,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int percentHeight = winHeight * 100 / screenHeight;
 
 			char windowTitle[256];
-			sprintf_s("Размер: %dx%d (%d%% x %d%%) | Позиция: (%d, %d)",
+
+			sprintf_s(windowTitle, sizeof(windowTitle),
+				"Размер: %dx%d (%d%% x %d%%)",
 				winWidth, winHeight,
-				percentWidth, percentHeight,
-				x, y);
-			//sprintf_s(windowTitle, sizeof(windowTitle),
-			//	"Размер: %dx%d (%d%% x %d%%)",
-			//	winWidth, winHeight,
-			//	percentWidth , percentHeight);
+				percentWidth , percentHeight);
 
 			SetWindowText(hwnd, windowTitle);
 		}
@@ -377,6 +381,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+		HWND hButton4 = CreateWindowEx
+		(
+			NULL,
+			"Button",
+			"Игра",
+			WS_CHILD | WS_VISIBLE,
+			230, 500,
+			80, 32,
+			hwnd, (HMENU)1018,
+			GetModuleHandle(NULL),
+			NULL
+
+		);
 
 
 	}
@@ -462,13 +479,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		break;
+		case 1018:
+		{
+			STARTUPINFOA game = { sizeof(game) };
+			PROCESS_INFORMATION pi;
+			LPCSTR exePath = "U:\\Users\\kit\\source\\repos\\OOP\\Geometry\\bin\\Debug\\Geometry.exe";
+			if (CreateProcess(exePath, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &game, &pi));
+			{
+				CloseHandle(pi.hProcess);
+				CloseHandle(pi.hThread);
 
-
+			}
+		}break;
 		}
-
-
-
-
 		break;
 	case WM_DESTROY:
 		//MessageBox(NULL, "Лучше двери закройте...", "Finita la comedia", MB_OK | MB_ICONERROR);
