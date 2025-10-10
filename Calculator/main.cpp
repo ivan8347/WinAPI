@@ -2,16 +2,69 @@
 #include<cstdio>
 #include "resource.h"
 
+CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 
-
-LRESULT CALLBACK WhdProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
+	// регистрация класса окна
+	WNDCLASSEX wClass;
+	ZeroMemory(&wClass, sizeof(wClass));
+	wClass.style = 0;
+	wClass.cbSize = sizeof(wClass);
+	wClass.cbWndExtra = 0;
+	wClass.cbClsExtra = 0;
+
+	wClass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	wClass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	wClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wClass.hbrBackground = (HBRUSH) COLOR_WINDOW;
+
+	wClass.hInstance = hInstance;
+	wClass.lpfnWndProc = WndProc;
+	wClass.lpszMenuName = NULL;
+	wClass.lpszClassName = g_sz_CLASS_NAME;
+
+	if (!RegisterClassEx(&wClass))
+	{
+		MessageBox(NULL, "Class registration filed", "", MB_OK | MB_ICONERROR);
+		return 0;
+	}
+
+	//создание окна
+	HWND hwnd = CreateWindowEx
+	(
+		NULL, 
+		g_sz_CLASS_NAME,
+		g_sz_CLASS_NAME,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,CW_USEDEFAULT,
+		CW_USEDEFAULT,CW_USEDEFAULT,
+		NULL,
+		NULL,
+		hInstance,
+		NULL
+	);
+	if (hwnd == NULL)
+	{
+		MessageBox(NULL, "Window creation failed", "Error", MB_OK | MB_ICONERROR);
+		return 0;
+	}
+	ShowWindow(hwnd, nCmdShow);
+	UpdateWindow(hwnd);
+	//запуск цикла сообщений
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	return msg.wParam;
 	
 	return 0;
 }
-LRESULT CALLBACK WhdProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -25,7 +78,7 @@ LRESULT CALLBACK WhdProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_DESTROY:
 	{
-		PostMessage(0);
+		PostQuitMessage(0);
 		break;
 	}
 	case WM_CLOSE:
