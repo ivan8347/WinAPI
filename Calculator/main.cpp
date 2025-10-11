@@ -1,24 +1,26 @@
 # include <Windows.h>
 #include<cstdio>
 #include "resource.h"
-CONST INT g_i_BUTTON_SIZE = 50;
+CONST INT g_i_BUTTON_SIZE = 80;
 CONST INT g_i_INTERVAL = 2;
 
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
+
 CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //двойная кнопка
-CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5;
-CONST INT g_i_SCREEN_HEIGHT = 25;
+CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
+CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
 CONST INT g_i_BUTTON_START_X = g_i_START_X;
-CONST INT g_i_BUTTON_START_Y = g_i_START_Y + g_i_SCREEN_HEIGHT + g_i_INTERVAL;
+CONST INT g_i_BUTTON_START_Y = g_i_START_Y + g_i_SCREEN_HEIGHT + g_i_INTERVAL * 4;
+
 
 CONST CHAR g_OPERATION[] = "+-*/";
 CONST INT g_i_OPERATION_STAT_X = g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 3;
 
-#define BUTTON_SHIFT(n) (g_i_BUTTON_SIZE + g_i_INTERVAL)*shift
-#define BUTTON_SHIFT_X(shift) g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*shift
-#define BUTTON_SHIFT_Y(shift) g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*shift
+
+#define BUTTON_SHIFT_X(shift) g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(shift)
+#define BUTTON_SHIFT_Y(shift) g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(shift)
 
 
 CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
@@ -57,9 +59,11 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		NULL,
 		g_sz_CLASS_NAME,
 		g_sz_CLASS_NAME,
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX ,
 		CW_USEDEFAULT, CW_USEDEFAULT,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		g_i_SCREEN_WIDTH + 2 * g_i_BUTTON_START_X + 16,
+		g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 4 + 42,
+		//CW_USEDEFAULT, CW_USEDEFAULT,
 		NULL,
 		NULL,
 		hInstance,
@@ -95,7 +99,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			"",
 			WS_CHILD | WS_VISIBLE | WS_BORDER,
 			10, 10,
-			260, 25,
+			g_i_SCREEN_WIDTH, g_i_SCREEN_HEIGHT,
 			hwnd,
 			(HMENU)IDC_EDIT,
 			GetModuleHandle(NULL),
@@ -127,8 +131,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		(
 			NULL, "Button", ".",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-			g_i_BUTTON_START_X + g_i_BUTTON_DOUBLE_SIZE + g_i_INTERVAL,
-			g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 3,
+			BUTTON_SHIFT_X(2), BUTTON_SHIFT_Y(3),
+			//g_i_BUTTON_START_X + g_i_BUTTON_DOUBLE_SIZE + g_i_INTERVAL,
+			//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 3,
 			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)(IDC_BUTTON_POINT), GetModuleHandle(NULL),
@@ -142,8 +147,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			(
 				NULL, "Button", operation,
 				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-				g_i_OPERATION_STAT_X,
-				g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * (3 - i),
+				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(3 - i),
+				//g_i_OPERATION_STAT_X,
+				//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * (3 - i),
 				g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 				hwnd,
 				(HMENU)(IDC_BUTTON_PLUS + i),
@@ -199,7 +205,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_COMMAND:
 	{
+		switch (LOWORD(wParam))
+		{
+		
+		{
 
+
+		}
+		break;
+
+
+
+
+
+			break;
+		}
 
 
 
