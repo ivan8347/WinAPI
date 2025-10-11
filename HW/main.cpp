@@ -41,11 +41,11 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 	//Создание окна
 
-	/**/int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
 
-	int winWidth = screenWidth * 2 / 4;
+	int winWidth = screenWidth *   3 / 4;
 	int winHeight = screenHeight * 3 / 4;
 
 	// Центрируем окно
@@ -481,7 +481,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 		case 1018:
 		{
-			STARTUPINFOA game = { sizeof(game) };
+			STARTUPINFO game = { sizeof(game) };
 			PROCESS_INFORMATION pi;
 			LPCSTR exePath = "U:\\Users\\kit\\source\\repos\\OOP\\Geometry\\bin\\Debug\\Geometry.exe";
 			if (CreateProcess(exePath, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &game, &pi));

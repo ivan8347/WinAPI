@@ -4,7 +4,7 @@
 //
 #define IDD_CALC                        101
 #define IDI_ICON1                       103
-#define IDC_EDIT1                       1020
+#define IDC_EDIT                        999
 #define IDC_BUTTON_0                    1000
 #define IDC_BUTTON_1                    1001
 #define IDC_BUTTON_2                    1002
@@ -23,7 +23,6 @@
 #define IDC_BUTTON_SLASH                1014
 
 #define IDC_BUTTON_BSP                  1015
-#define IDC_BUTTON_CLR                  1016
 #define IDC_BUTTON_CLR                  1016
 #define IDC_BUTTON_EQUAL                1017
 
