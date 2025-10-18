@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 # include <Windows.h>
 #include<cstdio>
+#include<float.h>
 #include "resource.h"
 CONST INT g_i_BUTTON_SIZE = 80;
 CONST INT g_i_INTERVAL = 2;
@@ -22,7 +24,7 @@ CONST INT g_i_OPERATION_STAT_X = g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INT
 #define BUTTON_SHIFT_X(shift) g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(shift)
 #define BUTTON_SHIFT_Y(shift) g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(shift)
 
-
+//CONST INT SIZE = 256;
 CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -59,7 +61,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		NULL,
 		g_sz_CLASS_NAME,
 		g_sz_CLASS_NAME,
-		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX ,
+		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX,
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		g_i_SCREEN_WIDTH + 2 * g_i_BUTTON_START_X + 16,
 		g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 4 + 42,
@@ -89,15 +91,21 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 }
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static DOUBLE a = DBL_MIN;
+	static DOUBLE b = 0;
+	static INT operation = 0;
+	static BOOL input = FALSE;
+	static BOOL input_operation = FALSE;
+
 	switch (uMsg)
 	{
 	case WM_CREATE:
 	{
 		HWND hEdit = CreateWindowEx
 		(
-			NULL, "Edit",
-			"",
-			WS_CHILD | WS_VISIBLE | WS_BORDER,
+			NULL, "Edit", "0",
+
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
 			10, 10,
 			g_i_SCREEN_WIDTH, g_i_SCREEN_HEIGHT,
 			hwnd,
@@ -111,7 +119,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				sz_digit[0] = digit++ + '0';
+				sz_digit[0] = digit + '0';
 				CreateWindowEx
 				(
 					NULL, "Button", sz_digit,
@@ -123,7 +131,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					(HMENU)(IDC_BUTTON_0 + digit),
 					GetModuleHandle(NULL),
 					NULL
-				);
+				); digit++;
 			}
 		}
 
@@ -205,27 +213,52 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_COMMAND:
 	{
-		switch (LOWORD(wParam))
+		CONST INT SIZE = 256;
+		CHAR sz_display[SIZE] = {};
+		CHAR  sz_digit[2] = {};
+		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
+		SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_display);
+		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
+			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
+
+			if (strcmp(sz_display, "0"))
+				strcat(sz_display, sz_digit);
+			else
+				strcpy(sz_display, sz_digit);
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+			input = TRUE;
+			//input_operation = FALSE;
+		}
+		if (LOWORD(wParam) == IDC_BUTTON_POINT && strchr(sz_display, '.') == NULL) 
+		{
+			
+				strcat(sz_display, ".");
+				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		
+		}
+		if (LOWORD(wParam) == IDC_BUTTON_BSP)
 		{
-
-
+			if (strlen(sz_display) == 1)sz_display[0] = '0';
+			else sz_display[strlen(sz_display) - 1] = 0;
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
-		break;
+		if (LOWORD(wParam) == IDC_BUTTON_CLR)
+		a = b = DBL_MIN;
+		operation = 0;
+		input = input_operation = FALSE;
+		SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"0");
 
-
-
-
-
-			break;
+		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH);
+		{
+			//if(a == DBL_MIN)a = atof(sz_display);
+		//else b = atof(sz_display);
+			(a == DBL_MIN ? a : b) = atof(sz_display);  // ANSI/ASCII to FLOAT
+			input = FALSE;
 		}
 
-
-
-
-		break;
 	}
+	break;
 	case WM_DESTROY:
 	{
 		PostQuitMessage(0);
