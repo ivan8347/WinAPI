@@ -470,7 +470,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			DOUBLE value, n;
 			CHAR op = '^';
-
+			//https://legacy.cplusplus.com/reference/cstdio/printf/
 			if (sscanf_s(sz_buffer, "%lf%c%lf", &value, &op, sizeof(op), &n) == 3)
 			{
 				DOUBLE result = pow(value, n);
