@@ -6,10 +6,8 @@
 #define IDI_ICON1                       103
 #define IDI_ICON_PLUS                   104
 #define IDI_ICON_MINUS                  105
-#define IDI_ICON_EQUAL                  106
-#define IDI_ICON_CLEAR                  107
-#define IDI_ICON_BACK                   108
-
+#define IDI_ICON_ASTER                  106
+#define IDI_ICON_SLASH                  107
 
 #define IDC_EDIT                        999
 #define IDC_BUTTON_0                    1000
@@ -22,23 +20,20 @@
 #define IDC_BUTTON_7                    1007
 #define IDC_BUTTON_8                    1008
 #define IDC_BUTTON_9                    1009
-
 #define IDC_BUTTON_POINT                1010
 #define IDC_BUTTON_PLUS                 1011
 #define IDC_BUTTON_MINUS                1012
 #define IDC_BUTTON_ASTER                1013
 #define IDC_BUTTON_SLASH                1014
-
 #define IDC_BUTTON_BSP                  1015
 #define IDC_BUTTON_CLR                  1016
 #define IDC_BUTTON_EQUAL                1017
-
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        104
+#define _APS_NEXT_RESOURCE_VALUE        110
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101

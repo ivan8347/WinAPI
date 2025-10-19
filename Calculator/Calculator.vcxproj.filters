@@ -33,5 +33,26 @@
     <Image Include="Debug\Calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Debug\plus.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="plus.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icons\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icons\plus.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icons\star.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icons\check.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icons\apple.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
