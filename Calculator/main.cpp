@@ -101,6 +101,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
+		HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
+		//HICON hIconPlus = (HICON)LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
 		HWND hEdit = CreateWindowEx
 		(
 			NULL, "Edit", "0",
@@ -154,7 +156,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CreateWindowEx
 			(
 				NULL, "Button", operation,
-				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON ,//| BS_ICON,
 				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(3 - i),
 				//g_i_OPERATION_STAT_X,
 				//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * (3 - i),
@@ -163,8 +165,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				(HMENU)(IDC_BUTTON_PLUS + i),
 				GetModuleHandle(NULL),
 				NULL
-
 			);
+			//SendMessage(IDC_BUTTON_PLUS, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconPlus);
 		}
 		CreateWindowEx
 		(
@@ -222,11 +224,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
 			if (input_operation)sz_display[0] = 0;
-		
-				
-				//sz_digit[1] = '\0';
-				//input_operation = FALSE;
-			
 			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
 
 			if (strcmp(sz_display, "0"))
@@ -239,10 +236,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_POINT && strchr(sz_display, '.') == NULL)
 		{
-
 			strcat_s(sz_display, ".");
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
-
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_BSP)
 		{
@@ -288,8 +283,64 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			sprintf_s(sz_display, "%g", a);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
+
 	}
 	break;
+	case WM_KEYDOWN:
+{
+    HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
+    CHAR sz_display[256] = {};
+    SendMessage(hEdit, WM_GETTEXT, sizeof(sz_display), (LPARAM)sz_display);
+
+    switch (wParam)
+    {
+    case '0': case '1': case '2': case '3': case '4':
+    case '5': case '6': case '7': case '8': case '9':
+    {
+        CHAR sz_digit[2] = { (CHAR)wParam, '\0' };
+        if (input_operation || strcmp(sz_display, "0") == 0)
+            strcpy_s(sz_display, sz_digit);
+        else
+            strcat_s(sz_display, sz_digit);
+        SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+        input = TRUE;
+        input_operation = FALSE;
+        break;
+    }
+    case VK_OEM_PERIOD: // точка
+    {
+        if (!strchr(sz_display, '.'))
+        {
+            strcat_s(sz_display, ".");
+            SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+        }
+        break;
+    }
+    case VK_ADD: case VK_OEM_PLUS:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_PLUS, 0);
+        break;
+    case VK_SUBTRACT: case VK_OEM_MINUS:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_MINUS, 0);
+        break;
+    case VK_MULTIPLY:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
+        break;
+    case VK_DIVIDE:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_SLASH, 0);
+        break;
+    case VK_RETURN:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0);
+        break;
+    case VK_BACK:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_BSP, 0);
+        break;
+    case VK_ESCAPE:
+        SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_CLR, 0);
+        break;
+    }
+    return 0;
+}
+
 	case WM_DESTROY:
 	{
 		PostQuitMessage(0);

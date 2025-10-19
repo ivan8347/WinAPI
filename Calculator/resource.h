@@ -4,6 +4,13 @@
 //
 #define IDD_CALC                        101
 #define IDI_ICON1                       103
+#define IDI_ICON_PLUS                   104
+#define IDI_ICON_MINUS                  105
+#define IDI_ICON_EQUAL                  106
+#define IDI_ICON_CLEAR                  107
+#define IDI_ICON_BACK                   108
+
+
 #define IDC_EDIT                        999
 #define IDC_BUTTON_0                    1000
 #define IDC_BUTTON_1                    1001
