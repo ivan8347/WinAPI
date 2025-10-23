@@ -8,7 +8,6 @@
 #define IDI_ICON_MINUS                  105
 #define IDI_ICON_ASTER                  106
 #define IDI_ICON_SLASH                  107
-
 #define IDC_EDIT                        999
 #define IDC_BUTTON_0                    1000
 #define IDC_BUTTON_1                    1001
@@ -33,7 +32,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        110
+#define _APS_NEXT_RESOURCE_VALUE        112
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101

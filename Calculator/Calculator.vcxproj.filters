@@ -54,5 +54,8 @@
     <Image Include="icons\apple.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="icons\ico00001.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
