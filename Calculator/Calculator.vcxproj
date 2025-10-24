@@ -139,6 +139,7 @@
     <Image Include="Debug\Calc.ico" />
     <Image Include="Debug\plus.ico" />
     <Image Include="icons\apple.ico" />
+    <Image Include="icons\button-1.ico" />
     <Image Include="icons\check.ico" />
     <Image Include="icons\ico00001.ico" />
     <Image Include="icons\icon2.ico" />

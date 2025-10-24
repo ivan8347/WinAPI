@@ -57,5 +57,8 @@
     <Image Include="icons\ico00001.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="icons\button-1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
