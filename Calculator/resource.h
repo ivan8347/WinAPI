@@ -9,6 +9,7 @@
 #define IDI_ICON_ASTER                  106
 #define IDI_ICON_SLASH                  107
 #define IDB_BITMAP1                     112
+
 #define IDC_EDIT                        999
 
 #define IDC_BUTTON_0                    1000

@@ -33,18 +33,6 @@
     <Image Include="Debug\Calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Debug\plus.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="plus.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icons\icon2.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icons\plus.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="icons\star.ico">
       <Filter>Resource Files</Filter>
     </Image>
@@ -52,12 +40,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="icons\apple.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icons\ico00001.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icons\button-1.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

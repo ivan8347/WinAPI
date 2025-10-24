@@ -360,8 +360,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		else if (wParam == '\r') SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0); // Enter
 		else if (wParam == 27) SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_CLR, 0);     // Escape
 		else if (wParam == 8) SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_BSP, 0);      // Backspace
-
-		
 	}break;
 
 
