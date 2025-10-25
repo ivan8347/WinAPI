@@ -272,13 +272,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			strcat_s(sz_display, ".");
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
-		if (LOWORD(wParam) == IDC_BUTTON_BSP)     ////ошибка
+		if (LOWORD(wParam) == IDC_BUTTON_BSP)     
 		{
 			if (strlen(sz_display) == 1)sz_display[0] = '0';
 			else sz_display[strlen(sz_display) - 1] = 0;
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
-		if (LOWORD(wParam) == IDC_BUTTON_CLR)     ////ошибка
+		if (LOWORD(wParam) == IDC_BUTTON_CLR)    
 		{
 			a = b = DBL_MIN;
 			operation = 0;
