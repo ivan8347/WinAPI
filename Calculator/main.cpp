@@ -3,6 +3,9 @@
 #include<cstdio>
 #include<float.h>
 #include "resource.h"
+
+HFONT g_hFont = NULL;
+
 CONST INT g_i_BUTTON_SIZE = 80;
 CONST INT g_i_INTERVAL = 2;
 
@@ -29,6 +32,7 @@ CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
+VOID SetFont(HWND hwnd, const char* fontName);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -98,17 +102,37 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static BOOL input = FALSE;
 	static BOOL input_operation = FALSE;
 
+
 	switch (uMsg)
 	{
 	case WM_CREATE:
 	{
+
+		HFONT g_hFont = NULL;
+		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+
+		//HFONT hFont = CreateFont
+		//(
+		//	60,                          // высота
+		//	30,                          // ширина
+		//	0, 0,                        // угол наклона
+		//	FW_MEDIUM,                   // жирность
+		//	FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
+		//	DEFAULT_CHARSET,
+		//	OUT_DEFAULT_PRECIS,
+		//	CLIP_DEFAULT_PRECIS,
+		//	DEFAULT_QUALITY,
+		//	DEFAULT_PITCH | FF_DONTCARE,
+		//	TEXT("OcularDoom-Regular")   // имя шрифта
+		//);
+
 		HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
 		//HICON hIconPlus = (HICON)LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
 		HWND hEdit = CreateWindowEx
 		(
 			NULL, "Edit", "0",
-
-			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER,
 			10, 10,
 			g_i_SCREEN_WIDTH, g_i_SCREEN_HEIGHT,
 			hwnd,
@@ -135,7 +159,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					GetModuleHandle(NULL),
 					NULL
 				);
-
 				digit++;
 			}
 		}
@@ -161,15 +184,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				NULL, "Button", operation,
 				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(3 - i),
-				//g_i_OPERATION_STAT_X,
-				//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * (3 - i),
 				g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 				hwnd,
 				(HMENU)(IDC_BUTTON_PLUS + i),
 				GetModuleHandle(NULL),
 				NULL
 			);
-			//SendMessage(IDC_BUTTON_PLUS, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconPlus);
 		}
 		HWND hButton0 = CreateWindowEx
 		(
@@ -182,15 +202,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
-		/*HANDLE hImage0 = LoadImage
-		(
-			GetModuleHandle(NULL), "buttons\\square_blue\\button_0.bmp",
-			IMAGE_BITMAP,
-			g_i_BUTTON_DOUBLE_SIZE, g_i_BUTTON_SIZE,
-			LR_LOADFROMFILE
 
-		);
-		SendMessage(hButton0, BM_SETIMAGE, 0, (LPARAM)hImage0);*/
 		CreateWindowEx
 		(
 			NULL, "Button", "<-",
@@ -225,10 +237,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
-		//SendMessage(GetDlgItem(hwnd, IDC_BUTTON_EQUAL), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
 
-
+		//SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)hFont, TRUE);
 		SetSkin(hwnd, "square_blue");
+		SetFont(hwnd, "ocular-doom");
 	}
 	break;
 	case WM_COMMAND:
@@ -300,6 +312,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			sprintf_s(sz_display, "%g", a);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
+
+	
+		switch (LOWORD(wParam))
+		{
+		case ID_MENU_THEME_BLUE:
+			SetSkin(hwnd, "square_blue");
+			break;
+		case ID_MENU_THEME_METAL:
+			SetSkin(hwnd, "metal_mistral");
+			break;
+		case ID_MENU_FONT_CONSOLAS:
+			SetFont(hwnd, "Consolas");
+			break;
+		case ID_MENU_FONT_PULS:
+			SetFont(hwnd, "Torment Pulsation Regular");
+			break;
+		case ID_MENU_FONT_DOOM:
+			SetFont(hwnd, "Ocular Doom Regular");
+			break;
+		
+			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
+			a = b = DBL_MIN;
+			operation = 0;
+			input = input_operation = FALSE;
+			break;
+		}
+		return 0;
+	
+
 	}
 	break;
 	case WM_KEYDOWN:
@@ -411,10 +452,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
+	case WM_CONTEXTMENU:
+	{
+		HMENU hMenu = CreatePopupMenu();
+
+		// Темы
+		HMENU hThemeMenu = CreatePopupMenu();
+		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_BLUE, "Синяя тема");
+		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_METAL, "Метал тема");
+		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hThemeMenu, "Тема");
+
+		// Шрифты
+		HMENU hFontMenu = CreatePopupMenu();
+		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_CONSOLAS, "Consolas");
+		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_PULS, "torment-pulsation");
+		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DOOM, "ocular-doom");
+		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFontMenu, "Шрифт");
+
+		TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, LOWORD(lParam), HIWORD(lParam), 0, hwnd, NULL);
+		DestroyMenu(hMenu);
+		return 0;
+	}
+
 	case WM_DESTROY:
 	{
+
+		//if (g_hFont) DeleteObject(g_hFont);
 		PostQuitMessage(0);
-		break;
+		return 0;
+
 	}
 	case WM_CLOSE:
 	{
@@ -427,6 +493,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 {
+
 	for (int i = 0; i < 10; i++)
 	{
 		CHAR sz_filename[FILENAME_MAX] = {};
@@ -464,8 +531,8 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 		GetModuleHandle(NULL),
 		sz_bsp,
 		IMAGE_BITMAP,
-		g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
-		
+		g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
+
 		LR_LOADFROMFILE
 	);
 	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_BSP), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBsp);
@@ -482,7 +549,7 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 		LR_LOADFROMFILE
 	);
 	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_CLR), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hClr);
-	
+
 	CHAR sz_equal[FILENAME_MAX] = {};
 	sprintf(sz_equal, "buttons\\%s\\button_equal.bmp", SZ_SKIN);
 	HBITMAP hEqual = (HBITMAP)LoadImage
@@ -506,11 +573,35 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 			GetModuleHandle(NULL),
 			sz_operation,
 			IMAGE_BITMAP,
-			g_i_BUTTON_SIZE ,
+			g_i_BUTTON_SIZE,
 			g_i_BUTTON_SIZE,
 			LR_LOADFROMFILE
 		);
 		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_PLUS + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hOperation);
 	}
 
+
+}
+VOID SetFont(HWND hwnd, const char* fontName)
+{
+	if (g_hFont) DeleteObject(g_hFont);
+
+	g_hFont = CreateFont(
+		70, 30, 0, 0, FW_MEDIUM,
+		FALSE, FALSE, FALSE,
+		DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS,
+		DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE,
+		fontName
+	);
+
+	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
+		HWND hCtrl = GetDlgItem(hwnd, i);
+		if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
+	}
+
+	
+	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
 }

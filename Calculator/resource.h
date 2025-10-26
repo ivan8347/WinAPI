@@ -33,6 +33,14 @@
 #define IDC_BUTTON_CLR                  1016
 #define IDC_BUTTON_EQUAL                1017
 
+#define ID_MENU_THEME_BLUE              4001
+#define ID_MENU_THEME_METAL             4002
+#define ID_MENU_FONT_CONSOLAS           4003
+#define ID_MENU_FONT_PULS               4004
+#define ID_MENU_FONT_DOOM               4005
+#define ID_MENU_RESET                   4006
+
+
 
 // Next default values for new objects
 // 
