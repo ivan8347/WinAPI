@@ -171,7 +171,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			);
 			//SendMessage(IDC_BUTTON_PLUS, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconPlus);
 		}
-		
+		HWND hButton0 = CreateWindowEx
+		(
+			NULL, "Button", "0",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
+			g_i_BUTTON_START_X, BUTTON_SHIFT_Y(3),
+			g_i_BUTTON_DOUBLE_SIZE, g_i_BUTTON_SIZE,
+			hwnd,
+			(HMENU)IDC_BUTTON_0,
+			GetModuleHandle(NULL),
+			NULL
+		);
 		/*HANDLE hImage0 = LoadImage
 		(
 			GetModuleHandle(NULL), "buttons\\square_blue\\button_0.bmp",
@@ -203,10 +213,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+
 		CreateWindowEx
 		(
 			NULL, "Button", "=",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON |BS_BITMAP,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(2),
 			g_i_BUTTON_SIZE, g_i_BUTTON_DOUBLE_SIZE,
 			hwnd,
@@ -214,8 +225,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+		//SendMessage(GetDlgItem(hwnd, IDC_BUTTON_EQUAL), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
+
 		
-		SetSkin(hwnd, "metal_mistral");
+		SetSkin(hwnd, "square_blue");
 	}
 	break;
 	case WM_COMMAND:
@@ -409,8 +422,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 	default: return DefWindowProc(hwnd, uMsg, wParam, lParam);
-
-
 	}
 	return FALSE;
 }
@@ -431,4 +442,6 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 			);
 			SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, 0, (LPARAM)hBitmap);
 	}
+	SendMessage(GetDlgItem(hwnd,IDC_BUTTON_POINT), BM_SETIMAGE, (LPARAM)hIconPlus);
+
 }
