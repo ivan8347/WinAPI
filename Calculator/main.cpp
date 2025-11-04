@@ -12,7 +12,7 @@ CONST INT g_i_INTERVAL = 2;
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
 
-CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //двойная кнопка
+CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; 
 CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
 CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
@@ -107,25 +107,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-
-		HFONT g_hFont = NULL;
 		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
 		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
 
-		//HFONT hFont = CreateFont
-		//(
-		//	60,                          // высота
-		//	30,                          // ширина
-		//	0, 0,                        // угол наклона
-		//	FW_MEDIUM,                   // жирность
-		//	FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
-		//	DEFAULT_CHARSET,
-		//	OUT_DEFAULT_PRECIS,
-		//	CLIP_DEFAULT_PRECIS,
-		//	DEFAULT_QUALITY,
-		//	DEFAULT_PITCH | FF_DONTCARE,
-		//	TEXT("OcularDoom-Regular")   // имя шрифта
-		//);
 
 		HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
 		//HICON hIconPlus = (HICON)LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
@@ -238,9 +222,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL
 		);
 
-		//SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)hFont, TRUE);
 		SetSkin(hwnd, "square_blue");
 		SetFont(hwnd, "ocular-doom");
+		
 	}
 	break;
 	case WM_COMMAND:
@@ -313,7 +297,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
 
-	
+
 		switch (LOWORD(wParam))
 		{
 		case ID_MENU_THEME_BLUE:
@@ -331,7 +315,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_FONT_DOOM:
 			SetFont(hwnd, "Ocular Doom Regular");
 			break;
-		
+
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
 			a = b = DBL_MIN;
 			operation = 0;
@@ -339,7 +323,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 		return 0;
-	
+
 
 	}
 	break;
@@ -579,29 +563,31 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 		);
 		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_PLUS + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hOperation);
 	}
-
+	
 
 }
-VOID SetFont(HWND hwnd, const char* fontName)
+VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 {
 	if (g_hFont) DeleteObject(g_hFont);
-
-	g_hFont = CreateFont(
-		70, 30, 0, 0, FW_MEDIUM,
-		FALSE, FALSE, FALSE,
+	g_hFont = CreateFont
+	(
+		60,                          // высота
+		30,                          // ширина
+		0, 0,                        // угол наклона
+		FW_MEDIUM,                   // жирность
+		FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
 		CLIP_DEFAULT_PRECIS,
 		DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE,
 		fontName
+		//TEXT("OcularDoom-Regular")   // имя шрифта
 	);
-
 	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
 		HWND hCtrl = GetDlgItem(hwnd, i);
 		if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
 	}
 
-	
 	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
 }
