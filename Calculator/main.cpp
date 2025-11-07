@@ -5,6 +5,8 @@
 #include "resource.h"
 
 HFONT g_hFont = NULL;
+//HINSTANCE g_hThemeDll = NULL;
+
 
 CONST INT g_i_BUTTON_SIZE = 80;
 CONST INT g_i_INTERVAL = 2;
@@ -109,6 +111,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
 		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+		//HINSTANCE hThemeDll = LoadLibraryEx("square_blue.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
+		//HINSTANCE hThemeDll = LoadLibraryEx("metal_mistral.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 
 
 		HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
@@ -222,7 +226,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL
 		);
 
-		SetSkin(hwnd, "square_blue");
+		SetSkin(hwnd, "bmp");
 		SetFont(hwnd, "ocular-doom");
 		
 	}
@@ -306,6 +310,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_THEME_METAL:
 			SetSkin(hwnd, "metal_mistral");
 			break;
+		case ID_MENU_THEME_BMP:
+			SetSkin(hwnd, "bmp");
+			break;
+		//case ID_MENU_THEME_BLUE:
+		//	SetSkin(hwnd, "square_blue.dll");
+		//	break;
+		//case ID_MENU_THEME_METAL:
+		//	SetSkin(hwnd, "metal_mistral.dll");
+		//	break;
+
 		case ID_MENU_FONT_CONSOLAS:
 			SetFont(hwnd, "Consolas");
 			break;
@@ -322,8 +336,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			input = input_operation = FALSE;
 			break;
 		}
-		return 0;
-
+	
 
 	}
 	break;
@@ -444,6 +457,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HMENU hThemeMenu = CreatePopupMenu();
 		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_BLUE, "Синяя тема");
 		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_METAL, "Метал тема");
+		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_BMP, "Кира тема");
 		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hThemeMenu, "Тема");
 
 		// Шрифты
@@ -457,12 +471,27 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		DestroyMenu(hMenu);
 		return 0;
 	}
+	case WM_CTLCOLOREDIT:
+	{
+		HDC hdc = (HDC)wParam;
+		SetTextColor(hdc, RGB(255, 0, 0)); 
+		SetBkColor(hdc, RGB(255, 255, 255));     
+		static HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
+		return (INT_PTR)hBrush;
+	}
+
 
 	case WM_DESTROY:
 	{
 
 		//if (g_hFont) DeleteObject(g_hFont);
 		PostQuitMessage(0);
+
+		//if (g_hThemeDll) {
+		//	FreeLibrary(g_hThemeDll);
+		//	g_hThemeDll = NULL;
+		//}
+
 		return 0;
 
 	}
@@ -566,6 +595,50 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 	
 
 }
+
+/*extern HINSTANCE g_hThemeDll;
+
+VOID SetSkin(HWND hwnd, LPCSTR szDllName)
+{
+	if (g_hThemeDll) {
+		FreeLibrary(g_hThemeDll);
+		g_hThemeDll = NULL;
+	}
+
+	g_hThemeDll = LoadLibraryEx(szDllName, NULL, LOAD_LIBRARY_AS_DATAFILE);
+	if (!g_hThemeDll) {
+		MessageBox(hwnd, "Не удалось загрузить тему", "Ошибка", MB_ICONERROR);
+		return;
+	}
+
+	for (int i = 0; i < 10; i++) {
+
+		HBITMAP hBitmap = LoadBitmap(g_hThemeDll, MAKEINTRESOURCE(IDB_BUTTON_0 + i));
+		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
+	}
+
+	struct {
+		int controlId;
+		int resourceId;
+	} buttons[] = {
+		{ IDC_BUTTON_POINT, IDB_BUTTON_POINT },
+		{ IDC_BUTTON_BSP,   IDB_BUTTON_BSP },
+		{ IDC_BUTTON_CLR,   IDB_BUTTON_CLR },
+		{ IDC_BUTTON_EQUAL, IDB_BUTTON_EQUAL },
+		{ IDC_BUTTON_PLUS,  IDB_BUTTON_PLUS },
+		{ IDC_BUTTON_MINUS, IDB_BUTTON_MINUS },
+		{ IDC_BUTTON_ASTER, IDB_BUTTON_ASTER },
+		{ IDC_BUTTON_SLASH, IDB_BUTTON_SLASH }
+	};
+
+	for (int i = 0; i < ARRAYSIZE(buttons); i++) {
+		HBITMAP hBmp = LoadBitmap(g_hThemeDll, MAKEINTRESOURCE(buttons[i].resourceId));
+		SendMessage(GetDlgItem(hwnd, buttons[i].controlId), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBmp);
+	}
+}*/
+
+
+
 VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 {
 	if (g_hFont) DeleteObject(g_hFont);

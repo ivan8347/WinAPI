@@ -35,6 +35,7 @@
 
 #define ID_MENU_THEME_BLUE              4001
 #define ID_MENU_THEME_METAL             4002
+#define ID_MENU_THEME_BMP               4007
 #define ID_MENU_FONT_CONSOLAS           4003
 #define ID_MENU_FONT_PULS               4004
 #define ID_MENU_FONT_DOOM               4005
