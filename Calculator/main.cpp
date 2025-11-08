@@ -35,7 +35,7 @@ CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 //VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
 VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
-//VOID SetFont(HWND hwnd, const char* fontName);
+VOID SetFont(HWND hwnd, const char* fontName);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -110,8 +110,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		//AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
-		//AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+		AddFontResourceEx("buttons\\digital-7\\digital-7 (mono).ttf", FR_PRIVATE, 0);
 		//HINSTANCE hThemeDll = LoadLibraryEx("square_blue.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 		//HINSTANCE hThemeDll = LoadLibraryEx("metal_mistral.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 
@@ -130,7 +131,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL
 		);
 
-		AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
+		/*AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
 		HFONT hFont = CreateFont
 		(
 			80,
@@ -145,7 +146,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			"Digital-7 Mono"
 
 		);
-		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);*/
 
 
 		INT digit = 1;
@@ -322,23 +323,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 
 
-		/*switch (LOWORD(wParam))
+		switch (LOWORD(wParam))
 		{
 		case ID_MENU_THEME_BLUE:
-			SetSkin(hwnd, "square_blue");
+			SetSkinDLL(hwnd, "square_blue.dll");
 			break;
 		case ID_MENU_THEME_METAL:
-			SetSkin(hwnd, "metal_mistral");
+			SetSkinDLL(hwnd, "metal_mistral.dll");
 			break;
 		case ID_MENU_THEME_BMP:
-			SetSkin(hwnd, "bmp");
+			SetSkinDLL(hwnd, "bmp.dll");
 			break;
-		//case ID_MENU_THEME_BLUE:
-		//	SetSkin(hwnd, "square_blue.dll");
-		//	break;
-		//case ID_MENU_THEME_METAL:
-		//	SetSkin(hwnd, "metal_mistral.dll");
-		//	break;
+		
 
 		case ID_MENU_FONT_CONSOLAS:
 			SetFont(hwnd, "Consolas");
@@ -349,13 +345,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_FONT_DOOM:
 			SetFont(hwnd, "Ocular Doom Regular");
 			break;
+				case ID_MENU_FONT_DIGIT:
+			SetFont(hwnd, "Digital-7 Mono");
+			break;
 
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
 			a = b = DBL_MIN;
 			operation = 0;
 			input = input_operation = FALSE;
 			break;
-		}*/
+		}
 
 
 	}
@@ -485,6 +484,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_CONSOLAS, "Consolas");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_PULS, "torment-pulsation");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DOOM, "ocular-doom");
+		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DIGIT, "Digital - 7 ");
 		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFontMenu, "״נטפע");
 
 		TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, LOWORD(lParam), HIWORD(lParam), 0, hwnd, NULL);
@@ -504,13 +504,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 	{
 
-		//if (g_hFont) DeleteObject(g_hFont);
+		
 		PostQuitMessage(0);
 
-		//if (g_hThemeDll) {
-		//	FreeLibrary(g_hThemeDll);
-		//	g_hThemeDll = NULL;
-		//}
+		
 
 		return 0;
 
@@ -549,7 +546,7 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 
 
 
-/*VOID SetFont(HWND hwnd, CONST CHAR* fontName)
+VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 {
 	if (g_hFont) DeleteObject(g_hFont);
 	g_hFont = CreateFont
@@ -567,10 +564,10 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 		fontName
 		//TEXT("OcularDoom-Regular")   // טלÿ רנטפעא
 	);
-	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
-		HWND hCtrl = GetDlgItem(hwnd, i);
-		if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
-	}
+	//for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
+	//	HWND hCtrl = GetDlgItem(hwnd, i);
+	//	if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
+	//}
 
 	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
-}*/
+}
