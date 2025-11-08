@@ -236,6 +236,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_COMMAND:
 	{
+		//цифры
+
 		CONST INT SIZE = 256;
 		CHAR sz_display[SIZE] = {};
 		CHAR sz_formula[256] = {};
@@ -341,6 +343,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//strcpy_s(sz_formula, sz_result);
 		}
 
+		//темы
 
 		switch (LOWORD(wParam))
 		{
@@ -489,10 +492,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
+
+	//контекстное меню
+
 	case WM_CONTEXTMENU:
 	{
 		HMENU hMenu = CreatePopupMenu();
-
 		// Темы
 		HMENU hThemeMenu = CreatePopupMenu();
 		AppendMenu(hThemeMenu, MF_STRING, ID_MENU_THEME_BLUE, "Синяя тема");
@@ -511,6 +516,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		DestroyMenu(hMenu);
 		return 0;
 	}
+
+	//цвет
+
 	case WM_CTLCOLOREDIT:
 	{
 		HDC hdc = (HDC)wParam;
