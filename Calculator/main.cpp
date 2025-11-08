@@ -9,7 +9,7 @@ CONST INT g_i_INTERVAL = 2;
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
 
-CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //двойная кнопка
+CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //������� ������
 CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
 CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
@@ -33,7 +33,7 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
-	// регистрация класса окна
+	// ����������� ������ ����
 	WNDCLASSEX wClass;
 	ZeroMemory(&wClass, sizeof(wClass));
 	wClass.style = 0;
@@ -57,7 +57,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		return 0;
 	}
 
-	//создание окна
+	//�������� ����
 	HWND hwnd = CreateWindowEx
 	(
 		NULL,
@@ -80,7 +80,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	}
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
-	//запуск цикла сообщений
+	//������ ����� ���������
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
@@ -124,8 +124,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
 		HFONT hFont = CreateFont
 		(
-			80,
-			40,
+			60,
+			30,
 			0, 0,
 			500, 0,0,0,
 			DEFAULT_CHARSET,
@@ -324,6 +324,44 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			sprintf_s(sz_display, "%g", a);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
+
+
+		/*switch (LOWORD(wParam))
+		{
+		case ID_MENU_THEME_BLUE:
+			SetSkin(hwnd, "square_blue");
+			break;
+		case ID_MENU_THEME_METAL:
+			SetSkin(hwnd, "metal_mistral");
+			break;
+		case ID_MENU_THEME_BMP:
+			SetSkin(hwnd, "bmp");
+			break;
+		//case ID_MENU_THEME_BLUE:
+		//	SetSkin(hwnd, "square_blue.dll");
+		//	break;
+		//case ID_MENU_THEME_METAL:
+		//	SetSkin(hwnd, "metal_mistral.dll");
+		//	break;
+
+		case ID_MENU_FONT_CONSOLAS:
+			SetFont(hwnd, "Consolas");
+			break;
+		case ID_MENU_FONT_PULS:
+			SetFont(hwnd, "Torment Pulsation Regular");
+			break;
+		case ID_MENU_FONT_DOOM:
+			SetFont(hwnd, "Ocular Doom Regular");
+			break;
+
+			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
+			a = b = DBL_MIN;
+			operation = 0;
+			input = input_operation = FALSE;
+			break;
+		}*/
+
+
 	}
 	break;
 	case WM_KEYDOWN:
