@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 # include <Windows.h>
 #include<cstdio>
 #include<float.h>
@@ -9,7 +9,7 @@ CONST INT g_i_INTERVAL = 2;
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
 
-CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //äâîéíàÿ êíîïêà
+CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; //Ð´Ð²Ð¾Ð¹Ð½Ð°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°
 CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
 CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
@@ -33,7 +33,7 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
-	// ðåãèñòðàöèÿ êëàññà îêíà
+	// Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ ÐºÐ»Ð°ÑÑÐ° Ð¾ÐºÐ½Ð°
 	WNDCLASSEX wClass;
 	ZeroMemory(&wClass, sizeof(wClass));
 	wClass.style = 0;
@@ -57,7 +57,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		return 0;
 	}
 
-	//ñîçäàíèå îêíà
+	//ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð¾ÐºÐ½Ð°
 	HWND hwnd = CreateWindowEx
 	(
 		NULL,
@@ -80,7 +80,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	}
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
-	//çàïóñê öèêëà ñîîáùåíèé
+	//Ð·Ð°Ð¿ÑƒÑÐº Ñ†Ð¸ÐºÐ»Ð° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
@@ -103,7 +103,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
+		AllocConsole();
+		freopen("CONOUT$", "w", stdout);
+
+		//HICON hIconPlus = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS));
 		//HICON hIconPlus = (HICON)LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON_PLUS), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
 		HWND hEdit = CreateWindowEx
 		(
@@ -117,6 +120,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+
+		AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
+		HFONT hFont = CreateFont
+		(
+			80,
+			40,
+			0, 0,
+			500, 0,0,0,
+			DEFAULT_CHARSET,
+			OUT_DEFAULT_PRECIS,
+			CLIP_CHARACTER_PRECIS,
+			ANTIALIASED_QUALITY,
+			DEFAULT_PITCH,
+			"Digital-7 Mono"
+
+		);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+
+
 		INT digit = 1;
 		CHAR sz_digit[2] = "";
 		for (int i = 6; i >= 0; i -= 3)
@@ -432,24 +454,19 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 	HMODULE hSkin = LoadLibrary(SZ_SKIN);
 	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++)
 	{
-		//CHAR sz_filename[FILENAME_MAX] = {};
-		//sprintf(sz_filename, "buttons\\%s\\button_%i.bmp",SZ_SKIN,i);
-			HBITMAP hBitmap = (HBITMAP)LoadImage
-			(
-				hSkin,
-				MAKEINTRESOURCE(i),
-				IMAGE_BITMAP,
-				i >IDC_BUTTON_0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
-				i >IDC_BUTTON_EQUAL ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
-				//g_i_BUTTON_SIZE,
+		HBITMAP hBitmap = (HBITMAP)LoadImage
+		(
+			hSkin,
+			MAKEINTRESOURCE(i),
+			IMAGE_BITMAP,
+			i > IDC_BUTTON_0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i == IDC_BUTTON_EQUAL ? g_i_BUTTON_DOUBLE_SIZE : g_i_BUTTON_SIZE,
 				LR_SHARED
 			);
 			SendMessage(GetDlgItem(hwnd,  i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
 	}
-	
-
 }
-VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
+/*VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -468,4 +485,6 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 	}
 	
 
-}
+}*/
+
+

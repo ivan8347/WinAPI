@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HW", "HW\HW.vcxproj", "{C2C
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Resoors", "Resoors\Resoors.vcxproj", "{8B4FB1E2-4974-4288-8514-DB8C2F86A1E2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CalculatorSetup", "CalculatorSetup\CalculatorSetup.vdproj", "{BB2A469A-7882-4515-9266-D153D4855BFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,10 @@ Global
 		{8B4FB1E2-4974-4288-8514-DB8C2F86A1E2}.Release|x64.Build.0 = Release|x64
 		{8B4FB1E2-4974-4288-8514-DB8C2F86A1E2}.Release|x86.ActiveCfg = Release|Win32
 		{8B4FB1E2-4974-4288-8514-DB8C2F86A1E2}.Release|x86.Build.0 = Release|Win32
+		{BB2A469A-7882-4515-9266-D153D4855BFA}.Debug|x64.ActiveCfg = Debug
+		{BB2A469A-7882-4515-9266-D153D4855BFA}.Debug|x86.ActiveCfg = Debug
+		{BB2A469A-7882-4515-9266-D153D4855BFA}.Release|x64.ActiveCfg = Release
+		{BB2A469A-7882-4515-9266-D153D4855BFA}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
