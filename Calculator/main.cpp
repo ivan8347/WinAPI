@@ -334,7 +334,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_THEME_BMP:
 			SetSkinDLL(hwnd, "bmp.dll");
 			break;
-		
+
 
 		case ID_MENU_FONT_CONSOLAS:
 			SetFont(hwnd, "Consolas");
@@ -345,7 +345,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_FONT_DOOM:
 			SetFont(hwnd, "Ocular Doom Regular");
 			break;
-				case ID_MENU_FONT_DIGIT:
+		case ID_MENU_FONT_DIGIT:
 			SetFont(hwnd, "Digital-7 Mono");
 			break;
 
@@ -504,10 +504,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 	{
 
-		
+
 		PostQuitMessage(0);
 
-		
+
 
 		return 0;
 
@@ -521,7 +521,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return FALSE;
 }
-	
+
 
 
 
@@ -548,6 +548,7 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 
 VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 {
+	//HMODULE hFont = LoadLibrary(fontName);
 	if (g_hFont) DeleteObject(g_hFont);
 	g_hFont = CreateFont
 	(
