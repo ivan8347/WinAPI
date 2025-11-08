@@ -20,6 +20,10 @@
 #define IDB_BUTTON_BSP						1015
 #define IDB_BUTTON_CLR						1016
 #define IDB_BUTTON_EQUAL					1017
+#define ID_MENU_FONT_PULS					4004
+#define ID_MENU_FONT_DOOM					4005
+#define ID_MENU_FONT_DIGIT					4006
+
 
 
 // Next default values for new objects
