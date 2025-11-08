@@ -14,7 +14,7 @@ CONST INT g_i_INTERVAL = 2;
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
 
-CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; 
+CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL;
 CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
 CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
@@ -33,8 +33,9 @@ CONST INT g_i_OPERATION_STAT_X = g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INT
 CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
-VOID SetFont(HWND hwnd, const char* fontName);
+//VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
+VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
+//VOID SetFont(HWND hwnd, const char* fontName);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -109,8 +110,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
-		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+		//AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
+		//AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
 		//HINSTANCE hThemeDll = LoadLibraryEx("square_blue.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 		//HINSTANCE hThemeDll = LoadLibraryEx("metal_mistral.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 
@@ -128,6 +129,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+
+		AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
+		HFONT hFont = CreateFont
+		(
+			80,
+			40,
+			0, 0,
+			500, 0, 0, 0,
+			DEFAULT_CHARSET,
+			OUT_DEFAULT_PRECIS,
+			CLIP_CHARACTER_PRECIS,
+			ANTIALIASED_QUALITY,
+			DEFAULT_PITCH,
+			"Digital-7 Mono"
+
+		);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+
+
 		INT digit = 1;
 		CHAR sz_digit[2] = "";
 		for (int i = 6; i >= 0; i -= 3)
@@ -226,9 +246,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL
 		);
 
-		SetSkin(hwnd, "bmp");
-		SetFont(hwnd, "ocular-doom");
-		
+		SetSkinDLL(hwnd, "bmp");
+		//SetFont(hwnd, "ocular-doom");
+
 	}
 	break;
 	case WM_COMMAND:
@@ -302,7 +322,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 
 
-		switch (LOWORD(wParam))
+		/*switch (LOWORD(wParam))
 		{
 		case ID_MENU_THEME_BLUE:
 			SetSkin(hwnd, "square_blue");
@@ -335,8 +355,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			operation = 0;
 			input = input_operation = FALSE;
 			break;
-		}
-	
+		}*/
+
 
 	}
 	break;
@@ -474,8 +494,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CTLCOLOREDIT:
 	{
 		HDC hdc = (HDC)wParam;
-		SetTextColor(hdc, RGB(255, 0, 0)); 
-		SetBkColor(hdc, RGB(255, 255, 255));     
+		SetTextColor(hdc, RGB(255, 0, 0));
+		SetBkColor(hdc, RGB(255, 255, 255));
 		static HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
 		return (INT_PTR)hBrush;
 	}
@@ -504,142 +524,32 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return FALSE;
 }
-VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
-{
-
-	for (int i = 0; i < 10; i++)
-	{
-		CHAR sz_filename[FILENAME_MAX] = {};
-		sprintf(sz_filename, "buttons\\%s\\button_%i.bmp", SZ_SKIN, i);
-		HBITMAP hBitmap = (HBITMAP)LoadImage
-		(
-			GetModuleHandle(NULL),
-			sz_filename,
-			IMAGE_BITMAP,
-			i > 0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
-			g_i_BUTTON_SIZE,
-			LR_LOADFROMFILE
-		);
-		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, 0, (LPARAM)hBitmap);
-	}
-
-	CHAR sz_point[FILENAME_MAX] = {};
-	sprintf(sz_point, "buttons\\%s\\button_point.bmp", SZ_SKIN);
-
-	HBITMAP hPoint = (HBITMAP)LoadImage
-	(
-		GetModuleHandle(NULL),
-		sz_point,
-		IMAGE_BITMAP,
-		g_i_BUTTON_SIZE,
-		g_i_BUTTON_SIZE,
-		LR_LOADFROMFILE
-	);
-	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_POINT), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hPoint);
-
-	CHAR sz_bsp[FILENAME_MAX] = {};
-	sprintf(sz_bsp, "buttons\\%s\\button_bsp.bmp", SZ_SKIN);
-	HBITMAP hBsp = (HBITMAP)LoadImage
-	(
-		GetModuleHandle(NULL),
-		sz_bsp,
-		IMAGE_BITMAP,
-		g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
-
-		LR_LOADFROMFILE
-	);
-	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_BSP), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBsp);
-
-	CHAR sz_clr[FILENAME_MAX] = {};
-	sprintf(sz_clr, "buttons\\%s\\button_clr.bmp", SZ_SKIN);
-	HBITMAP hClr = (HBITMAP)LoadImage
-	(
-		GetModuleHandle(NULL),
-		sz_clr,
-		IMAGE_BITMAP,
-		g_i_BUTTON_SIZE,
-		g_i_BUTTON_SIZE,
-		LR_LOADFROMFILE
-	);
-	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_CLR), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hClr);
-
-	CHAR sz_equal[FILENAME_MAX] = {};
-	sprintf(sz_equal, "buttons\\%s\\button_equal.bmp", SZ_SKIN);
-	HBITMAP hEqual = (HBITMAP)LoadImage
-	(
-		GetModuleHandle(NULL),
-		sz_equal,
-		IMAGE_BITMAP,
-		g_i_BUTTON_SIZE,
-		g_i_BUTTON_DOUBLE_SIZE,
-		LR_LOADFROMFILE
-	);
-	SendMessage(GetDlgItem(hwnd, IDC_BUTTON_EQUAL), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hEqual);
-
-	CONST CHAR* g_OPERATION[4] = { "plus", "minus", "aster", "slash" };
-	for (int i = 0; i < 4; i++)
-	{
-		CHAR sz_operation[FILENAME_MAX] = {};
-		sprintf(sz_operation, "buttons\\%s\\button_%s.bmp", SZ_SKIN, g_OPERATION[i]);
-		HBITMAP hOperation = (HBITMAP)LoadImage
-		(
-			GetModuleHandle(NULL),
-			sz_operation,
-			IMAGE_BITMAP,
-			g_i_BUTTON_SIZE,
-			g_i_BUTTON_SIZE,
-			LR_LOADFROMFILE
-		);
-		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_PLUS + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hOperation);
-	}
 	
 
+
+
+VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
+{
+	HMODULE hSkin = LoadLibrary(SZ_SKIN);
+	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++)
+	{
+		HBITMAP hBitmap = (HBITMAP)LoadImage
+		(
+			hSkin,
+			MAKEINTRESOURCE(i),
+			IMAGE_BITMAP,
+			i > IDC_BUTTON_0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i == IDC_BUTTON_EQUAL ? g_i_BUTTON_DOUBLE_SIZE : g_i_BUTTON_SIZE,
+			LR_SHARED
+		);
+		SendMessage(GetDlgItem(hwnd, i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
+	}
 }
 
-/*extern HINSTANCE g_hThemeDll;
-
-VOID SetSkin(HWND hwnd, LPCSTR szDllName)
-{
-	if (g_hThemeDll) {
-		FreeLibrary(g_hThemeDll);
-		g_hThemeDll = NULL;
-	}
-
-	g_hThemeDll = LoadLibraryEx(szDllName, NULL, LOAD_LIBRARY_AS_DATAFILE);
-	if (!g_hThemeDll) {
-		MessageBox(hwnd, "Не удалось загрузить тему", "Ошибка", MB_ICONERROR);
-		return;
-	}
-
-	for (int i = 0; i < 10; i++) {
-
-		HBITMAP hBitmap = LoadBitmap(g_hThemeDll, MAKEINTRESOURCE(IDB_BUTTON_0 + i));
-		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
-	}
-
-	struct {
-		int controlId;
-		int resourceId;
-	} buttons[] = {
-		{ IDC_BUTTON_POINT, IDB_BUTTON_POINT },
-		{ IDC_BUTTON_BSP,   IDB_BUTTON_BSP },
-		{ IDC_BUTTON_CLR,   IDB_BUTTON_CLR },
-		{ IDC_BUTTON_EQUAL, IDB_BUTTON_EQUAL },
-		{ IDC_BUTTON_PLUS,  IDB_BUTTON_PLUS },
-		{ IDC_BUTTON_MINUS, IDB_BUTTON_MINUS },
-		{ IDC_BUTTON_ASTER, IDB_BUTTON_ASTER },
-		{ IDC_BUTTON_SLASH, IDB_BUTTON_SLASH }
-	};
-
-	for (int i = 0; i < ARRAYSIZE(buttons); i++) {
-		HBITMAP hBmp = LoadBitmap(g_hThemeDll, MAKEINTRESOURCE(buttons[i].resourceId));
-		SendMessage(GetDlgItem(hwnd, buttons[i].controlId), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBmp);
-	}
-}*/
 
 
 
-VOID SetFont(HWND hwnd, CONST CHAR* fontName)
+/*VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 {
 	if (g_hFont) DeleteObject(g_hFont);
 	g_hFont = CreateFont
@@ -663,4 +573,4 @@ VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 	}
 
 	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
-}
+}*/
