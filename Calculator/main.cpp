@@ -14,7 +14,7 @@ CONST INT g_i_INTERVAL = 2;
 CONST INT g_i_START_X = 10;
 CONST INT g_i_START_Y = 10;
 
-CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL; 
+CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL;
 CONST INT g_i_SCREEN_WIDTH = (g_i_BUTTON_SIZE + g_i_INTERVAL) * 5 - g_i_INTERVAL;
 CONST INT g_i_SCREEN_HEIGHT = g_i_BUTTON_SIZE;
 
@@ -103,6 +103,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static INT operation = 0;
 	static BOOL input = FALSE;
 	static BOOL input_operation = FALSE;
+	 
+
 
 
 	switch (uMsg)
@@ -228,46 +230,57 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		SetSkin(hwnd, "bmp");
 		SetFont(hwnd, "ocular-doom");
-		
+
 	}
 	break;
+
 	case WM_COMMAND:
 	{
 		CONST INT SIZE = 256;
 		CHAR sz_display[SIZE] = {};
+		CHAR sz_formula[256] = {};
 		CHAR  sz_digit[2] = {};
 		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
 		SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_display);
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
-			if (input_operation)sz_display[0] = 0;
+			if (input_operation)  sz_display[0] = 0; sz_formula[0] = 0; }
+			//sz_display[0] = '\0';
 			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
 
 			if (strcmp(sz_display, "0"))
+			{
 				strcat_s(sz_display, sz_digit);
+				strcat_s(sz_formula, sz_digit);
+			}
 			else
+			{
 				strcpy_s(sz_display, sz_digit);
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+				strcat_s(sz_formula, sz_digit);
+			}
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_formula);
 			input = TRUE;
 			input_operation = FALSE;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_POINT && strchr(sz_display, '.') == NULL)
 		{
 			strcat_s(sz_display, ".");
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+			strcat_s(sz_formula, ".");
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_formula);
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_BSP)
 		{
 			if (strlen(sz_display) == 1)sz_display[0] = '0';
 			else sz_display[strlen(sz_display) - 1] = 0;
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_formula);
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_CLR)
 		{
 			a = b = DBL_MIN;
 			operation = 0;
 			input = input_operation = FALSE;
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"0");
+			strcpy_s(sz_display, "0");
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
 
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
@@ -276,14 +289,33 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//else b = atof(sz_display);
 			if (input)
 			{
-				(a == DBL_MIN ? a : b) = atof(sz_display);  // ANSI/ASCII to FLOAT
-				//if(input)
-				SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
+				if (a == DBL_MIN)
+					a = atof(sz_display);
+				else
+					b = atof(sz_display);
+
+				//(a == DBL_MIN ? a : b) = atof(sz_display);  // ANSI/ASCII to FLOAT
+
+				//SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
 			}
-			input = FALSE;
+
 			operation = LOWORD(wParam);
+			input = FALSE;
 			input_operation = TRUE;
+
+			switch (operation)
+			{
+			case IDC_BUTTON_PLUS:  strcat_s(sz_formula, " + "); break;
+			case IDC_BUTTON_MINUS: strcat_s(sz_formula, " - "); break;
+			case IDC_BUTTON_ASTER: strcat_s(sz_formula, " * "); break;
+			case IDC_BUTTON_SLASH: strcat_s(sz_formula, " / "); break;
+
+			}
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_formula);
 		}
+
+
+
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
 			if (input) b = atof(sz_display);
@@ -297,8 +329,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 			input = FALSE;
 			input_operation = FALSE;
-			sprintf_s(sz_display, "%g", a);
-			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_display);
+			//sprintf_s(sz_display, "%g", a);
+			CHAR sz_result[32] = {};
+			sprintf_s(sz_result, " = %g", a);
+			//strcpy_s(sz_display, sz_result);
+			strcat_s(sz_formula, sz_result);
+
+			//sprintf_s(sz_formula, "%g", a);
+			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_formula);
+			//strcpy_s(sz_display, sz_result);
+			//strcpy_s(sz_formula, sz_result);
 		}
 
 
@@ -313,12 +353,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_THEME_BMP:
 			SetSkin(hwnd, "bmp");
 			break;
-		//case ID_MENU_THEME_BLUE:
-		//	SetSkin(hwnd, "square_blue.dll");
-		//	break;
-		//case ID_MENU_THEME_METAL:
-		//	SetSkin(hwnd, "metal_mistral.dll");
-		//	break;
+			//case ID_MENU_THEME_BLUE:
+			//	SetSkin(hwnd, "square_blue.dll");
+			//	break;
+			//case ID_MENU_THEME_METAL:
+			//	SetSkin(hwnd, "metal_mistral.dll");
+			//	break;
 
 		case ID_MENU_FONT_CONSOLAS:
 			SetFont(hwnd, "Consolas");
@@ -336,7 +376,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			input = input_operation = FALSE;
 			break;
 		}
-	
+
 
 	}
 	break;
@@ -474,8 +514,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CTLCOLOREDIT:
 	{
 		HDC hdc = (HDC)wParam;
-		SetTextColor(hdc, RGB(255, 0, 0)); 
-		SetBkColor(hdc, RGB(255, 255, 255));     
+		SetTextColor(hdc, RGB(255, 0, 0));
+		SetBkColor(hdc, RGB(255, 255, 255));
 		static HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
 		return (INT_PTR)hBrush;
 	}
@@ -592,7 +632,7 @@ VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[])
 		);
 		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_PLUS + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hOperation);
 	}
-	
+
 
 }
 
@@ -644,8 +684,8 @@ VOID SetFont(HWND hwnd, CONST CHAR* fontName)
 	if (g_hFont) DeleteObject(g_hFont);
 	g_hFont = CreateFont
 	(
-		60,                          // высота
-		30,                          // ширина
+		40,                          // высота
+		20,                          // ширина
 		0, 0,                        // угол наклона
 		FW_MEDIUM,                   // жирность
 		FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
