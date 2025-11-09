@@ -254,7 +254,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkinDLL(hwnd, "bmp");
-		SetFontDLL(hwnd, "digital-7");
+		//SetFontDLL(hwnd, "digital-7");
 
 	}
 	break;
@@ -346,7 +346,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//	SetFont(hwnd, "Consolas");
 			//	break;
 		case 4006: // Digital-7
-			hFontsDLL = LoadLibrary("Digit.dll");
+			hFontsDLL = LoadLibrary("Fonts.dll");
 			SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
 			break;
 			//case ID_MENU_FONT_PULS:
