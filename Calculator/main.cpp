@@ -110,9 +110,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
-		AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
-		AddFontResourceEx("buttons\\digital-7\\digital-7 (mono).ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("Fonts\\Digital-7 Mono.ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("Fonts\\Ocular Doom Regular.ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("Fonts\\Torment Pulsation Regular", FR_PRIVATE, 0);
+
+		//AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
+		//AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
+		//AddFontResourceEx("buttons\\digital-7\\digital-7 (mono).ttf", FR_PRIVATE, 0);
 		//HINSTANCE hThemeDll = LoadLibraryEx("square_blue.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 		//HINSTANCE hThemeDll = LoadLibraryEx("metal_mistral.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
 
@@ -248,7 +252,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkinDLL(hwnd, "bmp");
-		//SetFont(hwnd, "ocular-doom");
+		SetFont(hwnd, "ocular-doom");
 
 	}
 	break;
