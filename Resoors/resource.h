@@ -2,9 +2,11 @@
 // Microsoft Visual C++ generated include file.
 // Used by Resource.rc
 //
+//#define IDR_MENU_FONT_PULS               4004
+//#define IDR_MENU_FONT_DOOM               4005
+#define IDR_MENU_FONT_DIGIT              4006
 
-
-#define IDR_MENU_FONT_DIGIT					4006
+//#define IDR_MENU_FONT_DIGIT					4006
 
 
 
