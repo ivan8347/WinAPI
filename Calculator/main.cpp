@@ -5,6 +5,8 @@
 #include "resource.h"
 
 HFONT g_hFont = NULL;
+HINSTANCE hFontsDLL = NULL;
+
 //HINSTANCE g_hThemeDll = NULL;
 
 
@@ -35,7 +37,7 @@ CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 //VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
 VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
-VOID SetFont(HWND hwnd, const char* fontName);
+VOID SetFontDLL(HWND hwnd, const char* fontName);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -110,10 +112,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		AddFontResourceEx("Fonts\\Digital-7 Mono.ttf", FR_PRIVATE, 0);
-		AddFontResourceEx("Fonts\\Ocular Doom Regular.ttf", FR_PRIVATE, 0);
-		AddFontResourceEx("Fonts\\Torment Pulsation Regular", FR_PRIVATE, 0);
-
+		//AddFontResourceEx("Fonts\\Digital-7 Mono.ttf", FR_PRIVATE, 0);
+		//AddFontResourceEx("Fonts\\Ocular Doom Regular.ttf", FR_PRIVATE, 0);
+		//AddFontResourceEx("Fonts\\Torment Pulsation Regular", FR_PRIVATE, 0);
+		HINSTANCE hFontsDLL = LoadLibrary("Fonts.dll");
 		//AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
 		//AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
 		//AddFontResourceEx("buttons\\digital-7\\digital-7 (mono).ttf", FR_PRIVATE, 0);
@@ -252,7 +254,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkinDLL(hwnd, "bmp");
-		SetFont(hwnd, "ocular-doom");
+		SetFontDLL(hwnd, "digital-7");
 
 	}
 	break;
@@ -340,18 +342,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 
 
-		case ID_MENU_FONT_CONSOLAS:
-			SetFont(hwnd, "Consolas");
+			//case ID_MENU_FONT_CONSOLAS:
+			//	SetFont(hwnd, "Consolas");
+			//	break;
+		case 4006: // Digital-7
+			hFontsDLL = LoadLibrary("Digit.dll");
+			SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
 			break;
-		case ID_MENU_FONT_PULS:
-			SetFont(hwnd, "Torment Pulsation Regular");
-			break;
-		case ID_MENU_FONT_DOOM:
-			SetFont(hwnd, "Ocular Doom Regular");
-			break;
-		case ID_MENU_FONT_DIGIT:
-			SetFont(hwnd, "Digital-7 Mono");
-			break;
+			//case ID_MENU_FONT_PULS:
+			//	SetFont(hwnd, "Torment Pulsation Regular");
+			//	break;
+			//case ID_MENU_FONT_DOOM:
+			//	SetFont(hwnd, "Ocular Doom Regular");
+			//	break;
+			//case ID_MENU_FONT_DIGIT:
+			//	SetFont(hwnd, "Digital-7 Mono");
+			//	break;
 
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
 			a = b = DBL_MIN;
@@ -488,7 +494,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_CONSOLAS, "Consolas");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_PULS, "torment-pulsation");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DOOM, "ocular-doom");
-		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DIGIT, "Digital - 7 ");
+		AppendMenu(hMenu, MF_STRING, 4006, "Шрифт: Digital-7");
+		//AppendMenu(hMenu, MF_STRING, ID_MENU_FONT_DIGIT, "Digital - 7 ");
 		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFontMenu, "Шрифт");
 
 		TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, LOWORD(lParam), HIWORD(lParam), 0, hwnd, NULL);
@@ -525,10 +532,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return FALSE;
 }
-
-
-
-
 VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 {
 	HMODULE hSkin = LoadLibrary(SZ_SKIN);
@@ -546,33 +549,79 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 		SendMessage(GetDlgItem(hwnd, i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
 	}
 }
+//VOID SetFontDLL(HWND hwnd, CONST CHAR* fontName)
+//{
+//	//HMODULE hFont = LoadLibrary(fontName);
+//	if (g_hFont) DeleteObject(g_hFont);
+//	g_hFont = CreateFont
+//	(
+//		60,                          // высота
+//		30,                          // ширина
+//		0, 0,                        // угол наклона
+//		FW_MEDIUM,                   // жирность
+//		FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
+//		DEFAULT_CHARSET,
+//		OUT_DEFAULT_PRECIS,
+//		CLIP_DEFAULT_PRECIS,
+//		DEFAULT_QUALITY,
+//		DEFAULT_PITCH | FF_DONTCARE,
+//		fontName
+//		//TEXT("OcularDoom-Regular")   // имя шрифта
+//	);
+//	//for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
+//	//	HWND hCtrl = GetDlgItem(hwnd, i);
+//	//	if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
+//	//}
+//
+//	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
+//}
+//#include <windows.h>
+//#include <fstream>
 
-
-
-
-VOID SetFont(HWND hwnd, CONST CHAR* fontName)
+VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalFontName)
 {
-	//HMODULE hFont = LoadLibrary(fontName);
+	// 1. Извлекаем шрифт из DLL
+	HRSRC hRes = FindResource(hDLL, MAKEINTRESOURCE(resourceID), RT_FONT);
+	if (!hRes) return;
+
+	HGLOBAL hMem = LoadResource(hDLL, hRes);
+	if (!hMem) return;
+
+	void* pFontData = LockResource(hMem);
+	DWORD fontSize = SizeofResource(hDLL, hRes);
+
+	// 2. Сохраняем во временный файл
+	const char* tempFontPath = "temp_font.ttf";
+	HANDLE hFile = CreateFileA(tempFontPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY, NULL);
+	if (hFile == INVALID_HANDLE_VALUE) return;
+
+	DWORD written;
+	WriteFile(hFile, pFontData, fontSize, &written, NULL);
+	CloseHandle(hFile);
+
+	// 3. Регистрируем шрифт
+	if (AddFontResourceExA(tempFontPath, FR_PRIVATE, 0) == 0) return;
+
+	// 4. Удаляем старый шрифт, если был
 	if (g_hFont) DeleteObject(g_hFont);
-	g_hFont = CreateFont
-	(
-		60,                          // высота
-		30,                          // ширина
-		0, 0,                        // угол наклона
-		FW_MEDIUM,                   // жирность
-		FALSE, FALSE, FALSE,         // курсив, подчёркивание, зачёркивание
+
+	// 5. Создаём шрифт по внутреннему имени
+	g_hFont = CreateFont(
+		60, 30, 0, 0, FW_MEDIUM,
+		FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
 		CLIP_DEFAULT_PRECIS,
 		DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE,
-		fontName
-		//TEXT("OcularDoom-Regular")   // имя шрифта
+		internalFontName
 	);
-	//for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
-	//	HWND hCtrl = GetDlgItem(hwnd, i);
-	//	if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
-	//}
+
+	// 6. Применяем шрифт к элементам
+	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++) {
+		HWND hCtrl = GetDlgItem(hwnd, i);
+		if (hCtrl) SendMessage(hCtrl, WM_SETFONT, (WPARAM)g_hFont, TRUE);
+	}
 
 	SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETFONT, (WPARAM)g_hFont, TRUE);
 }
