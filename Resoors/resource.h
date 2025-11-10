@@ -2,10 +2,16 @@
 // Microsoft Visual C++ generated include file.
 // Used by Resource.rc
 //
-#define IDR_MENU_FONT_PULS               4004
-#define IDR_MENU_FONT_DOOM               4005
-#define IDR_MENU_FONT_DIGIT              4006
-
+#define IDB_BUTTON_0                    1000
+#define IDB_BUTTON_1                    1001
+#define IDB_BUTTON_2                    1002
+#define IDB_BUTTON_3                    1003
+#define IDB_BUTTON_4                    1004
+#define IDB_BUTTON_5                    1005
+#define IDB_BUTTON_6                    1006
+#define IDB_BUTTON_7                    1007
+#define IDB_BUTTON_8                    1008
+#define IDB_BUTTON_9                    1009
 //#define IDR_MENU_FONT_DIGIT					4006
 
 
