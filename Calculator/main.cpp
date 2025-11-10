@@ -117,7 +117,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//AddFontResourceEx("Fonts\\Digital-7 Mono.ttf", FR_PRIVATE, 0);
 		//AddFontResourceEx("Fonts\\Ocular Doom Regular.ttf", FR_PRIVATE, 0);
 		//AddFontResourceEx("Fonts\\Torment Pulsation Regular", FR_PRIVATE, 0);
-		HINSTANCE hFontsDLL = LoadLibrary("Fonts.dll");
+		//HINSTANCE hFontsDLL = LoadLibrary("Fonts.dll");
+		 hFontsDLL = LoadLibrary("Digit.dll");
 		//AddFontResourceEx("buttons\\ocular-doom\\OcularDoom-Regular.ttf", FR_PRIVATE, 0);
 		//AddFontResourceEx("buttons\\square_blue\\Torment Pulsation.otf", FR_PRIVATE, 0);
 		//AddFontResourceEx("buttons\\digital-7\\digital-7 (mono).ttf", FR_PRIVATE, 0);
@@ -256,8 +257,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkinDLL(hwnd, "bmp");
-		//SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
-		SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
+		SetFontDLL(hwnd, hFontsDLL, ID_MENU_FONT_DIGIT, "Digital-7 Mono");
+		//SetFontDLL(hwnd, "digital-7");
 
 	}
 	break;
@@ -343,27 +344,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case ID_MENU_THEME_BMP:
 			SetSkinDLL(hwnd, "bmp.dll");
 			break;
-
-
-			//case ID_MENU_FONT_CONSOLAS:
-			//	SetFont(hwnd, "Consolas");
-			//	break;
 		case ID_MENU_FONT_PULS:
 			hFontsDLL = LoadLibrary("Puls.dll");
 			SetFontDLL(hwnd, hFontsDLL, ID_MENU_FONT_PULS, "Torment Pulsation Regular");
 			break;
 		case ID_MENU_FONT_DOOM:
 			hFontsDLL = LoadLibrary("Doom.dll");
-			SetFontDLL(hwnd, hFontsDLL, 4005, "Ocular Doom Regular");
+			SetFontDLL(hwnd, hFontsDLL, ID_MENU_FONT_DOOM, "Ocular Doom Regular");
 			break;
-		case ID_MENU_FONT_DIGIT: // Digital-7
+		case ID_MENU_FONT_DIGIT: 
 			hFontsDLL = LoadLibrary("Digit.dll");
-			SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
+			SetFontDLL(hwnd, hFontsDLL, ID_MENU_FONT_DIGIT, "Digital-7 Mono");
 			break;
-			//case ID_MENU_FONT_DIGIT:
-			//	SetFont(hwnd, "Digital-7 Mono");
-			//	break;
-
+	
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT), WM_SETTEXT, 0, (LPARAM)"0");
 			a = b = DBL_MIN;
 			operation = 0;
@@ -512,7 +505,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HDC hdc = (HDC)wParam;
 		SetTextColor(hdc, RGB(255, 0, 0));
 		SetBkColor(hdc, RGB(255, 255, 255));
-		static HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+		static HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
 		return (INT_PTR)hBrush;
 	}
 
@@ -586,9 +579,6 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalFontName)
 
 {
-	// 4. Удаляем старый шрифт, если был
-	if (g_hFont) DeleteObject(g_hFont);
-
 
 	// 1. Извлекаем шрифт из DLL
 	HRSRC hRes = FindResource(hDLL, MAKEINTRESOURCE(resourceID), RT_FONT);
@@ -601,7 +591,11 @@ VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalF
 	DWORD fontSize = SizeofResource(hDLL, hRes);
 
 	// 2. Сохраняем во временный файл
-	const char* tempFontPath = "temp_font.ttf";
+	char tempFontPath[MAX_PATH];
+	sprintf(tempFontPath, "temp_font_%d.ttf", resourceID);
+	RemoveFontResourceExA(tempFontPath, FR_PRIVATE, 0);
+	DeleteFileA(tempFontPath);
+
 	HANDLE hFile = CreateFileA(tempFontPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY, NULL);
 	if (hFile == INVALID_HANDLE_VALUE) return;
 
@@ -610,9 +604,11 @@ VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalF
 	CloseHandle(hFile);
 
 	// 3. Регистрируем шрифт
+	
 	if (AddFontResourceExA(tempFontPath, FR_PRIVATE, 0) == 0) return;
 
-
+	// 4. Удаляем старый шрифт, если был
+	//if (g_hFont) DeleteObject(g_hFont);
 
 	// 5. Создаём шрифт по внутреннему имени
 	g_hFont = CreateFont(

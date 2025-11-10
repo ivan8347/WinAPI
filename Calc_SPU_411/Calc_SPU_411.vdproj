@@ -21,14 +21,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_187D08EBD24D63AF524EF9ED159674A3"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_187D08EBD24D63AF524EF9ED159674A3"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
+        "MsmKey" = "8:_09F7F9292BCCA90D76995953521ABF82"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,8 +33,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
+        "MsmKey" = "8:_213550E72F9B41E7C7B7F4DD1FC13AFD"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2403CA7D48B3D5CF75C6D44AA2B4C996"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_360C44EE0E974D7382F93EFBBFF6C8F0"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3B66AE827C36BB59BD163083D2F08407"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,116 +63,56 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_58480593E3524ED582CCF1C70444A7D2"
+        "MsmKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5B3FA403BCA1A9F1A77C811613354B77"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
+        "MsmKey" = "8:_7DCF6B6A2FA18821BAC6E2A2318B03A4"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5B3FA403BCA1A9F1A77C811613354B77"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
+        "MsmKey" = "8:_9A10D1BC1BDE3CBC06EEAC44E5388450"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6914B95EC296B5B99A0F321A77317E60"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6914B95EC296B5B99A0F321A77317E60"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_706B9B2F079E4D499C448E1145390498"
+        "MsmKey" = "8:_9A608B6520CF4A6A8819A6914AEC795F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7CBFC0218E8E349888C446E3DBB9B620"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7CBFC0218E8E349888C446E3DBB9B620"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A2BB20127A4CF81D25B2C9FE4EA353DF"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A2BB20127A4CF81D25B2C9FE4EA353DF"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A3A533D0D6E7E197E6AA4B24FF2C7523"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A3A533D0D6E7E197E6AA4B24FF2C7523"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
+        "MsmKey" = "8:_A5803017641D49178C10B2A149563B1C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AF1BBA93C42C4982AF22A89CB4329E2A"
+        "MsmKey" = "8:_AAD0A7E750D49D5C6D2690F1E0EEFB96"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ABFEDD4AD9DF4A1DA98DF768DD23ED57"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_CBF2D9FC428B429CB8DA8FE9953A1BA8"
+        "MsmKey" = "8:_BA8EE60C76AB74559E8605D2579F48F0"
+        "OwnerKey" = "8:_7D7A649D6744417990C2096ACE68C82F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C403822D49EF41CC996E0ACA07B5905A"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F326EAC0BD922E2BECDBE74FB3E3347E"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F326EAC0BD922E2BECDBE74FB3E3347E"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FE15805226C2F900443618A04EEEED1B"
-        "OwnerKey" = "8:_A9A29D588AEB46BEB60385650AC091A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FE15805226C2F900443618A04EEEED1B"
-        "OwnerKey" = "8:_47F6B3346CFF4A66A89FC70362FDA37C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -181,6 +133,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -197,6 +157,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -238,10 +214,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_187D08EBD24D63AF524EF9ED159674A3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_09F7F9292BCCA90D76995953521ABF82"
             {
-            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
             "Condition" = "8:"
@@ -278,6 +254,86 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_213550E72F9B41E7C7B7F4DD1FC13AFD"
+            {
+            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2403CA7D48B3D5CF75C6D44AA2B4C996"
+            {
+            "SourcePath" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_360C44EE0E974D7382F93EFBBFF6C8F0"
+            {
+            "SourcePath" = "8:..\\Debug\\Digit.dll"
+            "TargetName" = "8:Digit.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B66AE827C36BB59BD163083D2F08407"
+            {
+            "SourcePath" = "8:VCRUNTIME140.dll"
+            "TargetName" = "8:VCRUNTIME140.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F1A911AE33647BAAFA8D014DC56E5BC"
             {
             "SourcePath" = "8:..\\Debug\\metal_mistral.dll"
@@ -298,87 +354,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58480593E3524ED582CCF1C70444A7D2"
-            {
-            "SourcePath" = "8:..\\Calculator\\buttons\\digital-7\\digital-7 (mono).ttf"
-            "TargetName" = "8:digital-7 (mono).ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_C88B6327E0FA40B297BA5E345D771EEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B3FA403BCA1A9F1A77C811613354B77"
-            {
-            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6914B95EC296B5B99A0F321A77317E60"
-            {
-            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_706B9B2F079E4D499C448E1145390498"
-            {
-            "SourcePath" = "8:..\\Calculator\\buttons\\torment-pulsation\\Torment Pulsation.otf"
-            "TargetName" = "8:Torment Pulsation.otf"
-            "Tag" = "8:"
-            "Folder" = "8:_C88B6327E0FA40B297BA5E345D771EEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CBFC0218E8E349888C446E3DBB9B620"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7DCF6B6A2FA18821BAC6E2A2318B03A4"
             {
             "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
             "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
@@ -398,10 +374,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2BB20127A4CF81D25B2C9FE4EA353DF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A10D1BC1BDE3CBC06EEAC44E5388450"
             {
-            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
+            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
             "Condition" = "8:"
@@ -418,10 +394,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3A533D0D6E7E197E6AA4B24FF2C7523"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A608B6520CF4A6A8819A6914AEC795F"
             {
-            "SourcePath" = "8:VCRUNTIME140.dll"
-            "TargetName" = "8:VCRUNTIME140.dll"
+            "SourcePath" = "8:..\\Debug\\Puls.dll"
+            "TargetName" = "8:Puls.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A5803017641D49178C10B2A149563B1C"
+            {
+            "SourcePath" = "8:..\\Debug\\Fonts.dll"
+            "TargetName" = "8:Fonts.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AAD0A7E750D49D5C6D2690F1E0EEFB96"
+            {
+            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
             "Condition" = "8:"
@@ -438,30 +454,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AF1BBA93C42C4982AF22A89CB4329E2A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ABFEDD4AD9DF4A1DA98DF768DD23ED57"
             {
-            "SourcePath" = "8:..\\Calculator\\buttons\\ocular-doom\\OcularDoom-Regular.ttf"
-            "TargetName" = "8:OcularDoom-Regular.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_C88B6327E0FA40B297BA5E345D771EEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBF2D9FC428B429CB8DA8FE9953A1BA8"
-            {
-            "SourcePath" = "8:..\\Debug\\Calculator.exe"
-            "TargetName" = "8:Calculator.exe"
+            "SourcePath" = "8:..\\Debug\\Doom.dll"
+            "TargetName" = "8:Doom.dll"
             "Tag" = "8:"
             "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
             "Condition" = "8:"
@@ -478,7 +474,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F326EAC0BD922E2BECDBE74FB3E3347E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BA8EE60C76AB74559E8605D2579F48F0"
             {
             "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
             "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
@@ -498,10 +494,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE15805226C2F900443618A04EEEED1B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C403822D49EF41CC996E0ACA07B5905A"
             {
-            "SourcePath" = "8:api-ms-win-crt-string-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-string-l1-1-0.dll"
+            "SourcePath" = "8:..\\Calculator\\Debug\\Calc.ico"
+            "TargetName" = "8:Calc.ico"
             "Tag" = "8:"
             "Folder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
             "Condition" = "8:"
@@ -515,7 +511,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -545,17 +541,6 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C88B6327E0FA40B297BA5E345D771EEA"
-                    {
-                    "Name" = "8:Fonts"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_37BC8D90CDD24B3EA9249B617495C15E"
-                        "Folders"
-                        {
-                        }
-                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_689207EBBDAD49F28D96E12A355CBC55"
@@ -586,7 +571,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Calc_SPU_411"
         "ProductCode" = "8:{5A93CBC0-15BC-434E-906C-AC96A33D4D52}"
-        "PackageCode" = "8:{C5CAEEAD-0178-4862-A76D-7AB41C584A86}"
+        "PackageCode" = "8:{37351497-80A1-4884-9F41-4ECCDA7FA92A}"
         "UpgradeCode" = "8:{A25314F6-957E-4DA6-AF91-3717BAB06A44}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -706,6 +691,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_28132369ACFC402EA3129F1B81BA064B"
+            {
+            "Name" = "8:Cakc_SPU_411"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_7D7A649D6744417990C2096ACE68C82F"
+            "Folder" = "8:_04DA71CC8D034AAC8433ACCB8AFAD143"
+            "WorkingFolder" = "8:_4DC3333D7C2A4D5FB33C5EDC91C8024E"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -1105,35 +1104,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_47F6B3346CFF4A66A89FC70362FDA37C"
-            {
-            "SourcePath" = "8:..\\Release\\Calculator.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_04DA71CC8D034AAC8433ACCB8AFAD143"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{9700DCEB-4ED2-4F7E-A230-EA62F6D58CF2}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A9A29D588AEB46BEB60385650AC091A7"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7D7A649D6744417990C2096ACE68C82F"
             {
             "SourcePath" = "8:..\\Release\\Calculator.exe"
             "TargetName" = "8:"
