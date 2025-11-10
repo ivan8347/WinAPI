@@ -37,7 +37,9 @@ CONST CHAR g_sz_CLASS_NAME[] = "Calc_SPU_411";
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 //VOID SetSkin(HWND hwnd, CONST CHAR SZ_SKIN[]);
 VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[]);
-VOID SetFontDLL(HWND hwnd, const char* fontName);
+VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalFontName);
+
+
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -254,7 +256,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkinDLL(hwnd, "bmp");
-		//SetFontDLL(hwnd, "digital-7");
+		//SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
+		SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
 
 	}
 	break;
@@ -345,16 +348,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//case ID_MENU_FONT_CONSOLAS:
 			//	SetFont(hwnd, "Consolas");
 			//	break;
-		case 4006: // Digital-7
-			hFontsDLL = LoadLibrary("Fonts.dll");
+		case ID_MENU_FONT_PULS:
+			hFontsDLL = LoadLibrary("Puls.dll");
+			SetFontDLL(hwnd, hFontsDLL, ID_MENU_FONT_PULS, "Torment Pulsation Regular");
+			break;
+		case ID_MENU_FONT_DOOM:
+			hFontsDLL = LoadLibrary("Doom.dll");
+			SetFontDLL(hwnd, hFontsDLL, 4005, "Ocular Doom Regular");
+			break;
+		case ID_MENU_FONT_DIGIT: // Digital-7
+			hFontsDLL = LoadLibrary("Digit.dll");
 			SetFontDLL(hwnd, hFontsDLL, 4006, "Digital-7 Mono");
 			break;
-			//case ID_MENU_FONT_PULS:
-			//	SetFont(hwnd, "Torment Pulsation Regular");
-			//	break;
-			//case ID_MENU_FONT_DOOM:
-			//	SetFont(hwnd, "Ocular Doom Regular");
-			//	break;
 			//case ID_MENU_FONT_DIGIT:
 			//	SetFont(hwnd, "Digital-7 Mono");
 			//	break;
@@ -494,9 +499,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_CONSOLAS, "Consolas");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_PULS, "torment-pulsation");
 		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DOOM, "ocular-doom");
-		AppendMenu(hMenu, MF_STRING, 4006, "Шрифт: Digital-7");
-		//AppendMenu(hMenu, MF_STRING, ID_MENU_FONT_DIGIT, "Digital - 7 ");
+		AppendMenu(hFontMenu, MF_STRING, ID_MENU_FONT_DIGIT, "Digital-7");
 		AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFontMenu, "Шрифт");
+
 
 		TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, LOWORD(lParam), HIWORD(lParam), 0, hwnd, NULL);
 		DestroyMenu(hMenu);
@@ -507,7 +512,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HDC hdc = (HDC)wParam;
 		SetTextColor(hdc, RGB(255, 0, 0));
 		SetBkColor(hdc, RGB(255, 255, 255));
-		static HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
+		static HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
 		return (INT_PTR)hBrush;
 	}
 
@@ -579,7 +584,12 @@ VOID SetSkinDLL(HWND hwnd, CONST CHAR SZ_SKIN[])
 //#include <fstream>
 
 VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalFontName)
+
 {
+	// 4. Удаляем старый шрифт, если был
+	if (g_hFont) DeleteObject(g_hFont);
+
+
 	// 1. Извлекаем шрифт из DLL
 	HRSRC hRes = FindResource(hDLL, MAKEINTRESOURCE(resourceID), RT_FONT);
 	if (!hRes) return;
@@ -602,12 +612,11 @@ VOID SetFontDLL(HWND hwnd, HINSTANCE hDLL, int resourceID, const CHAR* internalF
 	// 3. Регистрируем шрифт
 	if (AddFontResourceExA(tempFontPath, FR_PRIVATE, 0) == 0) return;
 
-	// 4. Удаляем старый шрифт, если был
-	if (g_hFont) DeleteObject(g_hFont);
+
 
 	// 5. Создаём шрифт по внутреннему имени
 	g_hFont = CreateFont(
-		60, 30, 0, 0, FW_MEDIUM,
+		80, 30, 0, 0, FW_MEDIUM,
 		FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
